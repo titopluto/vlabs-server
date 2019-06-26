@@ -1,0 +1,6 @@
+.idea/
+settings.dev.ini
+settings.prod.ini
+
+sqlite3.db
+.postgres.env

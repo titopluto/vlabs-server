@@ -1,0 +1,9 @@
+*/migrations/*
+!*/migrations/__init__.py
+
+
+media/*
+
+*/*settings.dev.ini
+*/*.db
+*/.git

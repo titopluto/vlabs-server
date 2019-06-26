@@ -1,0 +1,67 @@
+{% extends "admin/base.html" %}
+
+{% block title %} {{ 'Virtual Lab Studio Admin' }}{% endblock %}
+
+{% block extrastyle %}
+    <style>
+        body.login {
+            background: #3f495d !important;
+        }
+
+        body {
+            background: #c6cec1 !important;
+        }
+
+        #content h1 {
+            color: #1384da;
+            font-weight: bold;
+        }
+
+
+        #header {
+            background: #080504;
+            color: darkgoldenrod !important;
+        }
+
+        .module h2, .module caption, .inline-group h2 {
+            background: #2e4b33;
+        }
+
+        #branding h1, #branding h1 a:link, #branding h1 a:visited {
+             color: darkgoldenrod;
+            font-weight: bold;
+        }
+
+        div.breadcrumbs {
+            background: #2e4b33;
+            color: #46f524 !important;
+        }
+
+        .object-tools a:link, .object-tools a:visited {
+            background: mediumseagreen !important;
+        }
+
+        button.default, input[type=submit].default, .submit-row input.default {
+            background: mediumseagreen !important;
+            color: white;
+        }
+
+        .selector-chosen h2 {
+            background: #2e4b33 !important;
+            color: #fff;
+        }
+
+
+    </style>
+
+{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">
+    <a href="{% url 'admin:index' %}">
+        {{ 'Internetworking V-Lab Studio Admin' }}
+    </a>
+</h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

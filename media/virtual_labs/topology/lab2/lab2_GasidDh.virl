@@ -1,0 +1,281 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<topology xmlns="http://www.cisco.com/VIRL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" schemaVersion="0.95" xsi:schemaLocation="http://www.cisco.com/VIRL https://raw.github.com/CiscoVIRL/schema/v0.95/virl.xsd">
+    <node name="P1" type="SIMPLE" subtype="IOSv" location="91,153">
+        <extensions>
+            <entry key="config" type="String">! IOS Router Config template for INWK-Labs
+! by autonetkit_0.24.0
+!
+hostname P1
+Name
+boot-start-marker
+boot-end-marker
+!
+no aaa new-model
+!
+!
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+no service config
+enable password cisco
+ip classless
+ip subnet-zero
+no ip domain lookup
+ip domain name inwk.com
+crypto key generate rsa modulus 
+1024
+ip ssh server algorithm authentication password
+username cisco privilege 15 secret cisco
+!
+line con 0
+password cisco
+!</entry>
+        </extensions>
+        <interface id="0" name="GigabitEthernet0/1"/>
+        <interface id="1" name="GigabitEthernet0/2"/>
+    </node>
+    <node name="P2" type="SIMPLE" subtype="IOSv" location="71,394">
+        <extensions>
+            <entry key="config" type="String">! IOS Router Config template for INWK-Labs
+! by autonetkit_0.24.0
+!
+hostname P2
+Name
+boot-start-marker
+boot-end-marker
+!
+no aaa new-model
+!
+!
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+no service config
+enable password cisco
+ip classless
+ip subnet-zero
+no ip domain lookup
+ip domain name inwk.com
+crypto key generate rsa modulus 
+1024
+ip ssh server algorithm authentication password
+username cisco privilege 15 secret cisco
+!
+line con 0
+password cisco
+!</entry>
+        </extensions>
+        <interface id="0" name="GigabitEthernet0/1"/>
+        <interface id="1" name="GigabitEthernet0/2"/>
+    </node>
+    <node name="PE1" type="SIMPLE" subtype="IOSv" location="325,162">
+        <extensions>
+            <entry key="config" type="String">! IOS Router Config template for INWK-Labs
+! by autonetkit_0.24.0
+!
+hostname PE1
+Name
+boot-start-marker
+boot-end-marker
+!
+no aaa new-model
+!
+!
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+no service config
+enable password cisco
+ip classless
+ip subnet-zero
+no ip domain lookup
+ip domain name inwk.com
+crypto key generate rsa modulus 
+1024
+ip ssh server algorithm authentication password
+username cisco privilege 15 secret cisco
+!
+line con 0
+password cisco
+!</entry>
+        </extensions>
+        <interface id="0" name="GigabitEthernet0/1"/>
+        <interface id="1" name="GigabitEthernet0/2"/>
+        <interface id="2" name="GigabitEthernet0/3"/>
+    </node>
+    <node name="PE2" type="SIMPLE" subtype="IOSv" location="331,392">
+        <extensions>
+            <entry key="config" type="String">! IOS Router Config template for INWK-Labs
+! by autonetkit_0.24.0
+!
+hostname PE2
+Name
+boot-start-marker
+boot-end-marker
+!
+no aaa new-model
+!
+!
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+no service config
+enable password cisco
+ip classless
+ip subnet-zero
+no ip domain lookup
+ip domain name inwk.com
+crypto key generate rsa modulus 
+1024
+ip ssh server algorithm authentication password
+username cisco privilege 15 secret cisco
+!
+line con 0
+password cisco
+!</entry>
+        </extensions>
+        <interface id="0" name="GigabitEthernet0/1"/>
+        <interface id="1" name="GigabitEthernet0/2"/>
+        <interface id="2" name="GigabitEthernet0/3"/>
+    </node>
+    <node name="CE1" type="SIMPLE" subtype="IOSv" location="732,66">
+        <extensions>
+            <entry key="config" type="String">! IOS Router Config template for INWK-Labs
+! by autonetkit_0.24.0
+!
+hostname CE1
+Name
+boot-start-marker
+boot-end-marker
+!
+no aaa new-model
+!
+!
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+no service config
+enable password cisco
+ip classless
+ip subnet-zero
+no ip domain lookup
+ip domain name inwk.com
+crypto key generate rsa modulus 
+1024
+ip ssh server algorithm authentication password
+username cisco privilege 15 secret cisco
+!
+line con 0
+password cisco
+!</entry>
+        </extensions>
+        <interface id="0" name="GigabitEthernet0/1"/>
+    </node>
+    <node name="CE2" type="SIMPLE" subtype="IOSv" location="748,155">
+        <extensions>
+            <entry key="config" type="String">! IOS Router Config template for INWK-Labs
+! by autonetkit_0.24.0
+!
+hostname CE2
+Name
+boot-start-marker
+boot-end-marker
+!
+no aaa new-model
+!
+!
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+no service config
+enable password cisco
+ip classless
+ip subnet-zero
+no ip domain lookup
+ip domain name inwk.com
+crypto key generate rsa modulus 
+1024
+ip ssh server algorithm authentication password
+username cisco privilege 15 secret cisco
+!
+line con 0
+password cisco
+!</entry>
+        </extensions>
+        <interface id="0" name="GigabitEthernet0/1"/>
+    </node>
+    <node name="CE3" type="SIMPLE" subtype="IOSv" location="749,329">
+        <extensions>
+            <entry key="config" type="String">! IOS Router Config template for INWK-Labs
+! by autonetkit_0.24.0
+!
+hostname CE3
+Name
+boot-start-marker
+boot-end-marker
+!
+no aaa new-model
+!
+!
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+no service config
+enable password cisco
+ip classless
+ip subnet-zero
+no ip domain lookup
+ip domain name inwk.com
+crypto key generate rsa modulus 
+1024
+ip ssh server algorithm authentication password
+username cisco privilege 15 secret cisco
+!
+line con 0
+password cisco
+!</entry>
+        </extensions>
+        <interface id="0" name="GigabitEthernet0/1"/>
+    </node>
+    <node name="CE4" type="SIMPLE" subtype="IOSv" location="781,467">
+        <extensions>
+            <entry key="config" type="String">! IOS Router Config template for INWK-Labs
+! by autonetkit_0.24.0
+!
+hostname CE4
+Name
+boot-start-marker
+boot-end-marker
+!
+no aaa new-model
+!
+!
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+no service config
+enable password cisco
+ip classless
+ip subnet-zero
+no ip domain lookup
+ip domain name inwk.com
+crypto key generate rsa modulus 
+1024
+ip ssh server algorithm authentication password
+username cisco privilege 15 secret cisco
+!
+line con 0
+password cisco
+!</entry>
+        </extensions>
+        <interface id="0" name="GigabitEthernet0/1"/>
+    </node>
+    <annotations/>
+    <connection dst="/virl:topology/virl:node[1]/virl:interface[1]" src="/virl:topology/virl:node[3]/virl:interface[1]"/>
+    <connection dst="/virl:topology/virl:node[3]/virl:interface[2]" src="/virl:topology/virl:node[5]/virl:interface[1]"/>
+    <connection dst="/virl:topology/virl:node[3]/virl:interface[3]" src="/virl:topology/virl:node[6]/virl:interface[1]"/>
+    <connection dst="/virl:topology/virl:node[4]/virl:interface[1]" src="/virl:topology/virl:node[2]/virl:interface[1]"/>
+    <connection dst="/virl:topology/virl:node[1]/virl:interface[2]" src="/virl:topology/virl:node[2]/virl:interface[2]"/>
+    <connection dst="/virl:topology/virl:node[4]/virl:interface[2]" src="/virl:topology/virl:node[7]/virl:interface[1]"/>
+    <connection dst="/virl:topology/virl:node[4]/virl:interface[3]" src="/virl:topology/virl:node[8]/virl:interface[1]"/>
+</topology>
