@@ -13,29 +13,27 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 import datetime
-from configparser import RawConfigParser
+import yaml
+
 import ldap
 from django_auth_ldap.config import LDAPSearch, GroupOfNamesType, PosixGroupType
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
-
-config = RawConfigParser()
 if os.getenv('DJANGO_ENV') == 'docker-production':   
-    config.read(os.path.join(os.path.dirname(BASE_DIR), 'vlabsServer', 'vlabsServer/settings.prod.ini'))
+    config = yaml.safe_load(os.path.join(os.path.dirname(BASE_DIR), 'vlabsServer', 'vlabsServer/settings.prod.yml'))
 else:
-    config.read(os.path.join(os.path.dirname(BASE_DIR), 'vlabsServer', 'vlabsServer/settings.dev.ini'))
-
+    yml_settings = open(os.path.join(os.path.dirname(BASE_DIR), 'vlabsServer', 'vlabsServer/settings.dev.yml'))
+    config = yaml.safe_load(yml_settings)
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config.get('security', 'SECRET_KEY')
+SECRET_KEY = config['security']['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(config.get('security', 'DEBUG'))
+DEBUG = config['security']['DEBUG']
 
 # DOCKER = True
 
@@ -106,11 +104,11 @@ WSGI_APPLICATION = 'vlabsServer.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': config.get('database', 'DATABASE_ENGINE'),
-        'NAME': config.get('database', 'DATABASE_NAME'),
-        'USER': config.get('database', 'DATABASE_USER'),
-        'PASSWORD': config.get('database', 'DATABASE_PASSWORD'),
-        'HOST': config.get('database', 'DATABASE_HOST'),
+        'ENGINE': config['database']['ENGINE'],
+        'NAME': config['database']['NAME'],
+        'USER': config['database']['USER'],
+        'PASSWORD': config['database']['PASSWORD'],
+        'HOST': config['database']['HOST']
     }
 }
 
@@ -141,7 +139,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = config.get('security', 'TIME_ZONE')
+TIME_ZONE = config['security']['TIME_ZONE']
 
 USE_I18N = True
 
@@ -175,13 +173,20 @@ LOGOUT_REDIRECT_URL ="/"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
+DEFAULT_FILE_STORAGE = config['media-storage']['DEFAULT_FILE_STORAGE']
+SFTP_STORAGE_HOST = '10.0.146.60'
+SFTP_STORAGE_PARAMS = config['media-storage']['SFTP_STORAGE_PARAMS']
+SFTP_STORAGE_ROOT = config['media-storage']['SFTP_STORAGE_ROOT']
+
+SFTP_STORAGE_INTERACTIVE = config['media-storage']['SFTP_STORAGE_INTERACTIVE']
+
+
+MEDIA_ROOT = config['media-storage']['MEDIA_ROOT']
+MEDIA_URL = config['media-storage']['MEDIA_ROOT']
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static/"),)
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static_root')
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
 
 
 #AUTH SETTINGS
@@ -201,9 +206,9 @@ groups_dn = 'ou=groups,'+main_dn
 users_dn = 'ou=users,'+main_dn
 
 #CORE DJANGO-AUTH-LDAP SETTINGS
-AUTH_LDAP_SERVER_URI = config.get('ldap','AUTH_LDAP_SERVER_URI')
+AUTH_LDAP_SERVER_URI = config['ldap']['AUTH_LDAP_SERVER_URI']
 AUTH_LDAP_BIND_DN = 'cn=admin,'+main_dn
-AUTH_LDAP_BIND_PASSWORD = config.get('ldap','AUTH_LDAP_BIND_PASSWORD')
+AUTH_LDAP_BIND_PASSWORD = config['ldap']['AUTH_LDAP_BIND_PASSWORD']
 AUTH_LDAP_USER_SEARCH = LDAPSearch(users_dn, ldap.SCOPE_SUBTREE, "(uid=%(user)s)")
 
 AUTH_LDAP_USER_ATTR_MAP = {"first_name": "givenName",
