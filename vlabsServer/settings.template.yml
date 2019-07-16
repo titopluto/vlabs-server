@@ -1,0 +1,36 @@
+database:
+  ENGINE:
+  HOST: ~
+  PORT: ~
+  NAME: ~
+  USER: ~
+  PASSWORD: ~
+
+security:
+  SECRET_KEY:
+  ALLOWED_HOSTS:
+    - 127.0.0.1
+    - localhost
+  DEBUG: true
+  TIME_ZONE: America/Halifax
+
+ldap:
+  AUTH_LDAP_SERVER_URI:
+  AUTH_LDAP_BIND_PASSWORD:
+
+media-storage:
+  MEDIA_ROOT:
+  MEDIA_URL:
+  DEFAULT_FILE_STORAGE:
+  SFTP_STORAGE_HOST:
+  SFTP_STORAGE_PARAMS:
+    username:
+    password:
+    allow_agent:
+    look_for_keys:
+  SFTP_STORAGE_ROOT:
+  SFTP_STORAGE_INTERACTIVE:
+
+email:
+  SERVER_EMAIL:
+  EMAIL_HOST:
