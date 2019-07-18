@@ -13,3 +13,8 @@ sqlite3.db
 
 #media files
 media/
+
+#django app migration files
+migrations/
+/migrations/*
+!/migrations/__init__.py

@@ -33,12 +33,15 @@ WORKDIR /home/vlabsServer
 COPY requirements.txt .
 RUN pip3 install -r requirements.txt
 
-ENV DJANGO_ENV=docker-dev
-
+#create django environment variable to be used in settings.py
+ENV DJANGO_ENV=docker-production
 
 # copy rest of the code
 COPY . .
-RUN mkdir -p static
+
+#RUN mkdir -p static
+# collect django static file
+RUN python3 manage.py collectstatic --noinput
 
 
 
