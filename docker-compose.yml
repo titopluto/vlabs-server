@@ -5,14 +5,18 @@ services:
     image: postgres:9.6
     ports:
       - "5432:5432"
-    env_file:
-      - ./.postgres.env
+    environment:
+#      - ./.postgres.env
+      - POSTGRES_PORT=${POSTGRES_PORT}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
     volumes:
       - pg_data:/var/lib/postgresql/data
 
   web:
     build:
-      context: .
+      context: ""
 #      dockerfile: Dockerfile
     environment:
       - DJANGO_ENV=docker-production
@@ -24,11 +28,11 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - web_data:/home/vlabsServer
+#      - web_data:/home/vlabsServer
 #      - /Users/jupiter/Documents/venv/vlabsServer/vlabsServer:/docker_inwkAuth
     depends_on:
       - db 
 
 volumes:
-  web_data:
+#  web_data:
   pg_data:

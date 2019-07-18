@@ -293,7 +293,7 @@ class SimulationCreate(CreateAPIView):
                     response = simulation.confirm_simulation()
                     if response.status_code == 200:
                         msg= response.json()
-                        print(f'msg state ==> {msg["state"]}')
+                        # print(f'msg state ==> {msg["state"]}')
                         if msg['state'] =='ACTIVE':
                             print("recheck successful for user {} on {}".format(user, virl_ip))
                             return self.register_simulation(request)

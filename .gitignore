@@ -1,6 +1,15 @@
-.idea/
-settings.dev.ini
-settings.prod.ini
+#git ignore link: https://www.atlassian.com/git/tutorials/saving-changes/gitignore
 
+.idea/
+settings.dev.yml
+settings.prod.yml
+
+#python cache
+__pycache__/
+
+#database and postgres environment
 sqlite3.db
-.postgres.env
+.env
+
+#media files
+media/
