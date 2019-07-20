@@ -21,8 +21,14 @@ from django_auth_ldap.config import LDAPSearch, GroupOfNamesType, PosixGroupType
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-if os.getenv('DJANGO_ENV') == 'docker-production':   
-    config = yaml.safe_load(os.path.join(os.path.dirname(BASE_DIR), 'vlabsServer', 'vlabsServer/settings.prod.yml'))
+ENVIRONMENT = os.getenv('DJANGO_ENV')
+
+if ENVIRONMENT == 'production':
+    yml_settings = open(os.path.join(os.path.dirname(BASE_DIR), 'vlabsServer', 'vlabsServer/settings.prod.yml'))
+    config = yaml.safe_load(yml_settings)
+elif ENVIRONMENT == 'production-docker':
+    yml_settings = open(os.path.join(os.path.dirname(BASE_DIR), 'vlabsServer', 'vlabsServer/settings.prod.docker.yml'))
+    config = yaml.safe_load(yml_settings)
 else:
     yml_settings = open(os.path.join(os.path.dirname(BASE_DIR), 'vlabsServer', 'vlabsServer/settings.dev.yml'))
     config = yaml.safe_load(yml_settings)
@@ -37,7 +43,7 @@ DEBUG = config['security']['DEBUG']
 
 # DOCKER = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = config['security']['ALLOWED_HOSTS']
 
 
 # Application definition
@@ -170,24 +176,24 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL ="/"
 
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
-DEFAULT_FILE_STORAGE = config['media-storage']['DEFAULT_FILE_STORAGE']
-SFTP_STORAGE_HOST = '10.0.146.60'
-SFTP_STORAGE_PARAMS = config['media-storage']['SFTP_STORAGE_PARAMS']
-SFTP_STORAGE_ROOT = config['media-storage']['SFTP_STORAGE_ROOT']
+if ENVIRONMENT == 'production' or ENVIRONMENT == 'production-docker': # use ssh file storage
+    DEFAULT_FILE_STORAGE = config['media-storage']['DEFAULT_FILE_STORAGE']
+    SFTP_STORAGE_HOST = config['media-storage']['SFTP_STORAGE_HOST']
+    SFTP_STORAGE_PARAMS = config['media-storage']['SFTP_STORAGE_PARAMS']
+    SFTP_STORAGE_ROOT = config['media-storage']['SFTP_STORAGE_ROOT']
+    SFTP_STORAGE_INTERACTIVE = config['media-storage']['SFTP_STORAGE_INTERACTIVE']
 
-SFTP_STORAGE_INTERACTIVE = config['media-storage']['SFTP_STORAGE_INTERACTIVE']
-
-
-MEDIA_ROOT = config['media-storage']['MEDIA_ROOT']
-MEDIA_URL = config['media-storage']['MEDIA_ROOT']
+    MEDIA_ROOT = config['media-storage']['MEDIA_ROOT']
+    MEDIA_URL = config['media-storage']['MEDIA_ROOT']
+else: # use default file storage
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+    MEDIA_URL = '/media/'
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static/"),)
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static_root')
-
 
 #AUTH SETTINGS
 AUTHENTICATION_BACKENDS = (

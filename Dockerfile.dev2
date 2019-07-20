@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 LABEL maintainer=Tito
 
 # Install required packages and remove the apt packages cache when done.
@@ -15,16 +15,15 @@ RUN apt-get update \
                         libpq-dev \
                         postgresql-client \
                         libmysqlclient-dev \
-                        supervisor \
-                        nginx \
+#                        supervisor \
+#                        nginx \
                         vim \
  && pip3 install -U pip setuptools \
   # perform clean-up
  && rm -rf /var/lib/apt/lists/*
 
-
 # install uwsgi now because it takes a little while
-RUN pip3 install uwsgi
+#RUN pip3 install uwsgi
 
 #create and change working directory
 WORKDIR /home/vlabsServer
@@ -34,37 +33,11 @@ COPY requirements.txt .
 RUN pip3 install -r requirements.txt
 
 #create django environment variable to be used in settings.py
-ENV DJANGO_ENV=docker-dev
-
+ENV DJANGO_ENV=dev-docker
 
 # copy rest of the code
 COPY . .
 
-#RUN mkdir -p static
-# collect django static file 
-RUN python3 manage.py collectstatic --noinput
-
-# run  makemigrations to prepare database
-# since we are using sqlite for development ... dont do in production
-# because database is not connected and it will not be ready
-RUN python3 manage.py makemigrations
-
-
-
-#2nd phase Start (Nginx stuffs)
-#RUN echo "daemon off;" >> /etc/nginx/nginx.conf
-#COPY dockerConfigs/nginx/nginx.conf /etc/nginx/nginx.conf
-
-#COPY dockerConfigs/nginx/vlabsServer_nginx.conf /etc/nginx/sites-available/
-#RUN mkdir -p /etc/nginx/sites-enabled/ \
-#    && ln -s /etc/nginx/sites-available/vlabsServer_nginx.conf /etc/nginx/sites-enabled/
-
-COPY dockerConfigs/nginx/vlabsServer_nginx.conf /etc/nginx/conf.d/default.conf
-
-
-COPY dockerConfigs/supervisor/supervisor-app.conf /etc/supervisor/conf.d/
-
-
 EXPOSE 80
-CMD ["supervisord", "-n"]
+CMD ["python3", "manage.py", "runserver"]
 

@@ -31,3 +31,4 @@ requests==2.18.4
 six==1.10.0
 urllib3==1.22
 websocket-client==0.44.0
+psycopg2-binary

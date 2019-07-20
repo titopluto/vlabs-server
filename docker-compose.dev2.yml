@@ -1,0 +1,21 @@
+version: '3.1'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev2
+    environment:
+      - DJANGO_ENV=dev-docker
+    restart: always
+    command: bash -c "python3 manage.py makemigrations
+                  && python3 manage.py migrate
+                  && python3 manage.py collectstatic --noinput
+                  && python3 manage.py runserver 0.0.0.0:8000"
+    ports:
+      - "8000:8000"
+    volumes:
+#      - web_data:/home/vlabsServer
+      - /Users/jupiter/Documents/projects/inwklabs-swarm/vlabs-backend/vlabsServer:/home/vlabsServer
+
+

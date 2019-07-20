@@ -25,7 +25,6 @@ RUN mkdir -p /usr/share/man/man1 /usr/share/man/man7 \
 # perform clean-up
  && rm -rf /var/lib/apt/lists/*
 
-
 # install uwsgi now because it takes a little while
 RUN pip3 install uwsgi
 
