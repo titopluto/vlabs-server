@@ -3,6 +3,7 @@
 .idea/
 settings.dev.yml
 settings.prod.yml
+settings.prod.docker.yml
 
 #python cache
 __pycache__/
@@ -17,3 +18,7 @@ media/
 #django app migration files
 */migrations/*
 !*/migrations/__init__.py
+
+
+#pycharm settings
+.DS_Store
