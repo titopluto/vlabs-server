@@ -1,9 +1,26 @@
+#pycharm files
+.idea/
+
+#*/settings.dev.yml
+#*/settings.prod.yml
+#*/settings.prod.docker.yml
+
+#sqlite3.db
+
+
+#python cache
+*/__pycache__/
+
+#database and postgres environment
+
+#media files
+media/
+
+#django app migration files
 */migrations/*
 !*/migrations/__init__.py
 
 
-media/*
+#ignore git
+.git*
 
-*/*settings.dev.ini
-*/*.db
-*/.git
