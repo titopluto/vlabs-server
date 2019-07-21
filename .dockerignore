@@ -6,7 +6,7 @@
 #*/settings.prod.docker.yml
 
 #sqlite3.db
-
+#inwkauth.db
 
 #python cache
 */__pycache__/

@@ -32,11 +32,11 @@ RUN pip3 install uwsgi
 WORKDIR /home/vlabsServer
 
 #copy requirements and install
-COPY requirements.txt .
+COPY ./src/requirements.txt .
 RUN pip3 install -r requirements.txt
 
 # copy rest of the code
-COPY ../ .
+COPY ./src .
 RUN mkdir -p static
 
 ENV DJANGO_ENV=docker-production
@@ -48,7 +48,6 @@ COPY dockerConfigs/nginx/vlabsServer_nginx.conf /etc/nginx/conf.d/default.conf
 #RUN mkdir -p /etc/nginx/sites-enabled/ \
 # && ln -s /etc/nginx/sites-available/vlabsServer_nginx.conf /etc/nginx/sites-enabled/
 COPY dockerConfigs/supervisor/supervisor-app.conf /etc/supervisor/conf.d/
-
 
 EXPOSE 80
 CMD ["supervisord", "-n"]

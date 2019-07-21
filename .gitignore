@@ -10,6 +10,7 @@ __pycache__/
 
 #database and postgres environment
 sqlite3.db
+inwkauth.db
 .env
 
 #media files

@@ -22,27 +22,28 @@ RUN apt-get update \
   # perform clean-up
  && rm -rf /var/lib/apt/lists/*
 
-# install uwsgi now because it takes a little while
+# install uwsgi now because it takes a little while to install
 RUN pip3 install uwsgi
 
 #create and change working directory
 WORKDIR /home/vlabsServer
 
 #copy requirements and install
-COPY requirements.txt .
+COPY ./src/requirements.txt .
 RUN pip3 install -r requirements.txt
 
 #create django environment variable to be used in settings.py
 ENV DJANGO_ENV=production-docker
 
 # copy rest of the code
-COPY . .
+COPY ./src .
+
+#copy dockerconfig files mainly because it contains uwsgi files
+COPY ./dockerConfigs ../dockerConfigs
 
 COPY dockerConfigs/nginx/vlabsServer_nginx.conf /etc/nginx/conf.d/default.conf
 
-
 COPY dockerConfigs/supervisor/supervisor-app.conf /etc/supervisor/conf.d/
-
 
 EXPOSE 80
 CMD ["supervisord", "-n"]
